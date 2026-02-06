@@ -41,3 +41,11 @@ jobs:
         # Just to prove it exists and is usable
         - name: List downloaded files here
           run: ls -l 
+        - name: Show current working directory
+          run: pwd
+
+        - name: List workspace contents
+          run: ls -l
+
+        - name: List artifact folder contents
+          run: ls -l demo-jar
