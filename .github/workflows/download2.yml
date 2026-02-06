@@ -1,0 +1,20 @@
+name: Download (Triggered by workflow_run)
+
+on:
+  workflow_run:
+    workflows: ["Upload (Build + Artifact)"]
+    types: [completed]
+
+jobs:
+  deploy-simulated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact from previous workflow run
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-jar
+          path: demo-jar
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Verify downloaded files
+        run: ls -l demo-jar
