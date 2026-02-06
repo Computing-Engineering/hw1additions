@@ -37,6 +37,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: demo-jar
+            path: demo-jar
 
         # Just to prove it exists and is usable
         - name: List downloaded files here
