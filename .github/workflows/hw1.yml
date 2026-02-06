@@ -39,5 +39,5 @@ on:
             name: demo-jar
 
       # Just to prove it exists and is usable
-         - name: List downloaded files
+         - name: List downloaded files here
            run: ls -l 
