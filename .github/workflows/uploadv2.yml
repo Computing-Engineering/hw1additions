@@ -1,0 +1,31 @@
+name: Upload (Build + Artifact)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17 with Maven cache
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven   # simple built-in cache
+
+      - name: Run unit tests
+        run: mvn -B test
+
+      - name: Package JAR
+        run: mvn -B -DskipTests package
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-jar
+          path: target/*.jar
