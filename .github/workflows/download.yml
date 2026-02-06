@@ -1,0 +1,28 @@
+name: Download (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      run_id:
+        required: true
+        type: string
+      artifact_name:
+        required: true
+        type: string
+
+jobs:
+  deploy-simulated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact from the caller workflow run
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: demo-jar
+          run-id: ${{ inputs.run_id }}
+
+      - name: Verify downloaded files
+        run: |
+          pwd
+          ls -l
+          ls -l demo-jar
